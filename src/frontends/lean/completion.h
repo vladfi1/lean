@@ -11,6 +11,9 @@ Authors: Gabriel Ebner, Leonardo de Moura, Sebastian Ullrich
 #include "util/sexpr/options.h"
 #include "frontends/lean/json.h"
 #include "util/lean_path.h"
+#include "util/json.hpp"
+
+using json = nlohmann::json;
 
 namespace lean {
 std::vector<json> get_decl_completions(std::string const & pattern, environment const & env, options const & o);

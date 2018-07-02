@@ -21,6 +21,7 @@ Author: Leonardo de Moura
 #include "frontends/lean/json.h"
 #include "frontends/lean/info_manager.h"
 #include "frontends/lean/interactive.h"
+#include "util/log_tree.h"
 
 namespace lean {
 class type_info_data : public info_data_cell {

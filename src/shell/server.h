@@ -14,6 +14,9 @@ Authors: Gabriel Ebner, Sebastian Ullrich
 #include "frontends/lean/json.h"
 #include "library/mt_task_queue.h"
 #include "util/cancellable.h"
+#include "util/json.hpp"
+
+using json = nlohmann::json;
 
 namespace lean {
 

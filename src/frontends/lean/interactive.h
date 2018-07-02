@@ -10,6 +10,10 @@ Author: Sebastian Ullrich
 #include "library/module_mgr.h"
 #include "frontends/lean/parser.h"
 #include "frontends/lean/info_manager.h"
+#include "util/json.hpp"
+
+using json = nlohmann::json;
+
 namespace lean {
 void interactive_report_type(environment const & env, options const & opts, expr const & e, json & j);
 void report_completions(environment const & env, options const & opts, pos_info const & pos, bool skip_completions,
