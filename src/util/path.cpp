@@ -15,6 +15,11 @@ Author: Leonardo de Moura, Gabriel Ebner
 #include <vector>
 #include <sys/types.h>
 #include <sys/stat.h>
+// Linux version
+#include <unistd.h>
+#include <string.h>
+#include <limits.h> // NOLINT
+#include <stdio.h>
 #include "util/exception.h"
 #include "util/sstream.h"
 #include "util/optional.h"
@@ -69,11 +74,6 @@ std::string get_exe_location() {
 }
 bool is_path_sep(char c) { return c == g_path_sep; }
 #else
-// Linux version
-#include <unistd.h>
-#include <string.h>
-#include <limits.h> // NOLINT
-#include <stdio.h>
 static char g_path_sep     = ':';
 static constexpr char g_sep          = '/';
 static char g_bad_sep      = '\\';
