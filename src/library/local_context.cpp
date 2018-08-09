@@ -375,7 +375,12 @@ local_context local_context::remove(buffer<expr> const & locals) const {
         r.m_idx2local_decl.erase(d.get_idx());
         r.erase_user_name(d);
     }
-    lean_assert(r.well_formed());
+    /* START DHS */
+    if (!r.well_formed()) {
+      throw exception(sstream() << "ill-formed local constant");
+    }
+    // lean_assert(r.well_formed());
+    /* END DHS */
     return r;
 }
 
@@ -399,17 +404,14 @@ bool local_context::well_formed() const {
     for_each([&](local_decl const & d) {
             if (!locals_subset_of(d.get_type(), found_locals)) {
                 ok = false;
-                lean_unreachable();
             }
             if (auto v = d.get_value()) {
                 if (!locals_subset_of(*v, found_locals)) {
                     ok = false;
-                    lean_unreachable();
                 }
             }
             if (!m_user_names.contains(d.get_pp_name())) {
                 ok = false;
-                lean_unreachable();
             }
             found_locals.insert(d.get_name());
         });

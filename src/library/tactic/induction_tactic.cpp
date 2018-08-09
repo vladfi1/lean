@@ -316,7 +316,13 @@ list<expr> induction(environment const & env, options const & opts, transparency
                 set_intron(aux_M, ctx2, opts, aux_M, nparams, H_name, ns, param_names, true);
                 /* Introduce hypothesis that had to be reverted because they depended on indices and/or major premise. */
                 set_intron(aux_M, ctx2, opts, aux_M, nextra, extra_names, false);
-                local_context aux_M_lctx = ctx2.mctx().get_metavar_decl(aux_M).get_context();
+                optional<metavar_decl> omdecl = ctx2.mctx().find_metavar_decl(aux_M);
+
+                if (!static_cast<bool>(omdecl)) {
+                  throw exception("metavar decl not found");
+                }
+
+                local_context aux_M_lctx = omdecl->get_context();
                 if (ilist) {
                     /* Save name of constructor parameters that have been introduced for new goal. */
                     buffer<expr> params;

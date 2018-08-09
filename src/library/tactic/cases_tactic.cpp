@@ -336,6 +336,15 @@ struct cases_tactic_fn {
         local_context lctx   = g.get_context();
         /* Normalize next equation lhs and rhs if needed */
         expr target          = g.get_type();
+        /* START DHS */
+        if (!(is_pi(target) && is_arrow(target))) {
+          std::ostringstream os;
+          os << "CASES::UNIFY_EQS target not an arrow: " << target << "\n";
+          std::string s = os.str();
+          std::cout << s << std::endl;
+          throw_exception(target, s.c_str());
+        }
+        /* END DHS */
         lean_assert(is_pi(target) && is_arrow(target));
         if (is_eq(binding_domain(target), lhs, rhs)) {
             type_context_old ctx     = mk_type_context_for(mvar);
